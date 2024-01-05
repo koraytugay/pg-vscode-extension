@@ -1,0 +1,140 @@
+{
+  "name": "my-tree-view-extension",
+  "displayName": "my-tree-view-extension",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "colors": [
+      {
+        "id": "my.theme.icon.color",
+        "description": "This is my theme icon color",
+        "defaults": {
+          "dark": "#cc0029",
+          "light": "#cc0029",
+          "highContrast": "#cc0029",
+          "highContrastLight": "#cc0029"
+        }
+      },
+      {
+        "id": "my.theme.icon.color.yellow",
+        "description": "This is my yellow icon color",
+        "defaults": {
+          "dark": "#ccaa29",
+          "light": "#ccaa29",
+          "highContrast": "#ccaa29",
+          "highContrastLight": "#ccaa29"
+        }
+      }
+    ],
+    "commands": [
+      {
+        "command": "my-tree-view-extension.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "my-tree-view-extension.showHelloWorldPanel",
+        "title": "Show Hello World Panel"
+      },
+      {
+        "command": "my-tree-view-extension.addItem",
+        "title": "Add item",
+        "icon": {
+          "light": "src/assets/passed.png",
+          "dark": "src/assets/passed.png"
+        }
+      },
+      {
+        "command": "my-tree-view-extension.removeItem",
+        "title": "Remove item",
+        "icon": {
+          "light": "src/assets/failed.png",
+          "dark": "src/assets/failed.png"
+        }
+      },
+      {
+        "command": "my-tree-view-extension.configureUrl",
+        "title": "Configure URL"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "my-tree-view-extension.addItem",
+          "when": "view == my-view-id",
+          "group": "navigation@0"
+        },
+        {
+          "command": "my-tree-view-extension.removeItem",
+          "when": "view == my-view-id",
+          "group": "navigation@1"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "my-view-container",
+          "title": "My View Container",
+          "icon": "src/assets/undefined.png"
+        }
+      ]
+    },
+    "views": {
+      "my-view-container": [
+        {
+          "id": "my-view-id",
+          "name": "My View"
+        },
+        {
+          "id": "my-version-view-id",
+          "name": "My Version View"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "My Tree View Extension",
+      "properties": {
+        "myTreeView.url": {
+          "type": "string",
+          "default": "http://localhost",
+          "markdownDescription": "My extension URL..",
+          "order": 0
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "node ./esbuild.js",
+    "package": "SET NODE_ENV=production & node ./esbuild.js",
+    "watch": "node ./esbuild.js --watch",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.8",
+    "esbuild": "^0.16.17",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@vscode/webview-ui-toolkit": "^1.3.1"
+  }
+}
